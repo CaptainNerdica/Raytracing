@@ -1,0 +1,50 @@
+{
+	"Scene": {
+		"SkyBoxLowColor": [ 1, 1, 1 ],
+		"SkyBoxHighColor": [ 0, 0.53, 1 ]
+	},
+	"Camera": {
+		"Position": [ 0, 4, -3 ],
+		"Rotation": [ 0, -15 ],
+		"NearClipping": 0.05,
+		"MaxDistance": 1000,
+		"PlaneWidth": 0.1,
+		"MaxReflections": 50
+	},
+	"Objects": [
+		{
+			"Type": "Raytracing.Objects.TiledPlane",
+			"Object": {
+				"Origin": [ 0, 0, 0 ],
+				"Basis": [ 1, 0, 0 ],
+				"Normal": [ 0, 1, 0 ],
+				"TileLength": 1,
+				"Material": {
+					"Color": [ 1, 1, 1 ],
+					"Diffuse": 0.025,
+					"Reflectivity": 0.3,
+					"Shininess": 25,
+					"Ambient": 0.05
+				},
+				"OtherMaterial": {
+					"Color": [ 0, 0, 0 ],
+					"Diffuse": 0.1,
+					"Reflectivity": 0.1,
+					"Shininess": 25,
+					"Ambient": 0.05
+				}
+			}
+		}
+	],
+	"Lights": [
+		{
+			"Type": "Raytracing.Lights.PointLight",
+			"Light": {
+				"Center": [ 0, 10, 0 ],
+				"Intensity": 1,
+				"DropOffPower": 0,
+				"Color": [ 1, 1, 1 ]
+			}
+		}
+	]
+}

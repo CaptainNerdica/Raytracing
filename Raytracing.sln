@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raytracing", "Raytracing\Raytracing.csproj", "{00A76C18-018E-426B-8621-4117D141755D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{6ACF7603-BDAB-451A-9EF5-C88A158128F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StereoLithographyLib", "StereoLithographyLib\StereoLithographyLib.csproj", "{467A3630-038F-4B2D-B064-3336DC689B81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00A76C18-018E-426B-8621-4117D141755D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A76C18-018E-426B-8621-4117D141755D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00A76C18-018E-426B-8621-4117D141755D}.Debug|x64.ActiveCfg = Debug|x64
+		{00A76C18-018E-426B-8621-4117D141755D}.Debug|x64.Build.0 = Debug|x64
+		{00A76C18-018E-426B-8621-4117D141755D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00A76C18-018E-426B-8621-4117D141755D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00A76C18-018E-426B-8621-4117D141755D}.Release|x64.ActiveCfg = Release|Any CPU
+		{00A76C18-018E-426B-8621-4117D141755D}.Release|x64.Build.0 = Release|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Debug|x64.Build.0 = Debug|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Release|x64.ActiveCfg = Release|Any CPU
+		{6ACF7603-BDAB-451A-9EF5-C88A158128F0}.Release|x64.Build.0 = Release|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Debug|x64.Build.0 = Debug|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Release|x64.ActiveCfg = Release|Any CPU
+		{467A3630-038F-4B2D-B064-3336DC689B81}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E82E0851-41E3-4AF7-972F-B992CEA517AA}
+	EndGlobalSection
+EndGlobal
