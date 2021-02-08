@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace Raytracing.Objects
 			Material = material;
 		}
 
-		public Triangle(Point vert0, Point vert1, Point vert2, Material material) : this(Vector3.Cross(vert1 - vert0, vert2 - vert0).Normalized, vert0, vert1, vert2, material)
+		public Triangle(Point vert0, Point vert1, Point vert2, Material material) : this(Vector3.Cross(vert1 - vert0, vert2 - vert0).Normalized(), vert0, vert1, vert2, material)
 		{ }
 
 		public override bool Intersects(Ray ray, float current, float max, out RayHit hit)
@@ -48,7 +49,7 @@ namespace Raytracing.Objects
 			if (v < 0.0 || u + v > 1)
 				return false;
 			float t = f * Vector3.Dot(edge2, q);
-			if (t > epsilon)
+			if (t > epsilon && t < max)
 			{
 				Point p = ray.PointAtDistance(t);
 				hit = new RayHit(p, NormalAt(p), t, MaterialAt(p));

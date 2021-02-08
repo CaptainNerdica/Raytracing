@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Raytracing.Objects
 		{
 			Vector3 dir = ray.Origin - Origin;
 			float b = Vector3.Dot(dir, ray.Direction);
-			float c = dir.LengthSquared - Radius * Radius;
+			float c = dir.LengthSquared() - Radius * Radius;
 			float discriminant = b * b - c;
 			rayHit = default;
 			if (discriminant < 0)
@@ -37,7 +38,7 @@ namespace Raytracing.Objects
 			rayHit = new RayHit(point, NormalAt(point), root, Material);
 			return true;
 		}
-		public override Vector3 NormalAt(Point position) => (position - Origin).Normalized;
+		public override Vector3 NormalAt(Point position) => (position - Origin).Normalized();
 		public override Material MaterialAt(Point position) => Material;
 	}
 }

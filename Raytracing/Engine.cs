@@ -59,7 +59,13 @@ namespace Raytracing
 					Span<Color> blendBuffer = stackalloc Color[blendAmount * blendAmount];
 					int w = 2 * blendAmount + 1;
 					for (int k = 0; k < blendBuffer.Length; k++)
-						blendBuffer[k] = scene.TraceRay(scene.Camera.GetRay(i + (float)(1 + 2 * (k % blendAmount)) / w + (float)ThreadSafeRandom.NextDouble() - 0.5f, j + (float)(1 + 2 * (k / blendAmount)) / w + (float)ThreadSafeRandom.NextDouble() - 0.5f, width, height), scene.Camera.NearClipping, scene.Camera.MaxDistance, blendAmount, ref rays);
+					{
+						float offsetX = (float)ThreadSafeRandom.NextDouble() - 0.5f;
+						float offsetY = (float)ThreadSafeRandom.NextDouble() - 0.5f;
+						float u = i + (float)(1 + 2 * (k % blendAmount) + offsetX) / w;
+						float v = j + (float)(1 + 2 * (k / blendAmount) + offsetY) / w;
+						blendBuffer[k] = scene.TraceRay(scene.Camera.GetRay(u, v, width, height), scene.Camera.NearClipping, scene.Camera.MaxDistance, ref rays);
+					}
 					colors[i + j * width] += Color.Blend(blendBuffer) / samples;
 					++progress.Iteration;
 				});

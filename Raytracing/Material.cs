@@ -16,9 +16,7 @@ namespace Raytracing
 		public float Shininess { get; }
 		public Color Color { get; }
 
-		public static readonly Material Mirror = new Material(0.05f, 0, 1, 75, Color.White);
-		public static readonly Material Black = new Material(0.05f, 0.1f, 0, 3, Color.Black);
-		public static readonly Material White = new Material(0.05f, 0.1f, 0, 3, Color.White);
+		public static readonly Material Mirror = new Material(0.05f, 0, 1, 75, Color.Black);
 
 		[JsonConstructor]
 		public Material(float ambient, float diffuse, float reflectivity, float shininess, Color color)

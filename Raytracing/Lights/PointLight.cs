@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,8 +15,8 @@ namespace Raytracing.Lights
 			DropOffPower = dropOffPower;
 		}
 
-		public override float IntensityAt(Point position) => Intensity / MathF.Pow((position - Center).Length, DropOffPower);
-		public override Vector3 DirectionAt(Point position) => (Center - position).Normalized;
-		public override float DistanceAt(Point position) => (Center - position).Length;
+		public override float IntensityAt(Point position) => Intensity / MathF.Pow((position - Center).Length(), DropOffPower);
+		public override Vector3 DirectionAt(Point position) => (Center - position).Normalized();
+		public override float DistanceAt(Point position) => (Center - position).Length();
 	}
 }

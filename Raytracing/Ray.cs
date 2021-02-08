@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace Raytracing
 		public Ray(Point origin, Vector3 direction)
 		{
 			Origin = origin;
-			Direction = direction.Normalized;
+			Direction = direction.Normalized();
 		}
 
 		public Point PointAtDistance(float distance) => Origin + Direction * distance;

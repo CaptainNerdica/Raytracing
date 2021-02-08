@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Raytracing
 			ICollection<SceneObject> objects = new HashSet<SceneObject>();
 			foreach (Facet facet in stl.Facets)
 			{
-				Vector3 normal = (facet.Normal.X, facet.Normal.Z, facet.Normal.Y);
+				Vector3 normal = (Point)(facet.Normal.X, facet.Normal.Z, facet.Normal.Y);
 				Point vert0 = (facet.Vertex1.X, facet.Vertex1.Z, facet.Vertex1.Y);
 				Point vert1 = (facet.Vertex2.X, facet.Vertex2.Z, facet.Vertex2.Y);
 				Point vert2 = (facet.Vertex3.X, facet.Vertex3.Z, facet.Vertex3.Y);
@@ -37,7 +38,7 @@ namespace Raytracing
 			foreach (Facet facet in stl.Facets)
 			{
 				Material mat = new Material(0.05f, (float)rand.NextDouble(), (float)rand.NextDouble(), rand.Next(0, 1000), new Color((float)rand.NextDouble(), (float)rand.NextDouble(), (float)rand.NextDouble()));
-				Vector3 normal = (facet.Normal.X, facet.Normal.Z, facet.Normal.Y);
+				Vector3 normal = (Point)(facet.Normal.X, facet.Normal.Z, facet.Normal.Y);
 				Point vert0 = (facet.Vertex1.X, facet.Vertex1.Z, facet.Vertex1.Y);
 				Point vert1 = (facet.Vertex2.X, facet.Vertex2.Z, facet.Vertex2.Y);
 				Point vert2 = (facet.Vertex3.X, facet.Vertex3.Z, facet.Vertex3.Y);
@@ -55,7 +56,10 @@ namespace Raytracing
 		}
 		public static Scene FromJson(string json)
 		{
-			JsonSceneImport? import = JsonSerializer.Deserialize<JsonSceneImport>(json);
+			JsonSerializerOptions options = new JsonSerializerOptions();
+			options.Converters.Add(new Vector3Converter());
+			options.Converters.Add(new Vector2Converter());
+			JsonSceneImport? import = JsonSerializer.Deserialize<JsonSceneImport>(json, options);
 			if (import is null)
 				throw new JsonException("Could not deserialize scene");
 			ICollection<SceneObject> sceneObjects = new HashSet<SceneObject>();
@@ -66,7 +70,7 @@ namespace Raytracing
 					throw new Exception($"Could not find type {objImport.Type}");
 				if (!objType.IsAssignableTo(typeof(SceneObject)))
 					throw new Exception($"Type does not inherit from ${nameof(SceneObject)}.");
-				if (JsonSerializer.Deserialize(objImport.Object.GetRawText(), objType) is not SceneObject obj)
+				if (JsonSerializer.Deserialize(objImport.Object.GetRawText(), objType, options) is not SceneObject obj)
 					throw new Exception("Could not deserialize scene object.");
 				sceneObjects.Add(obj);
 			}
@@ -78,7 +82,7 @@ namespace Raytracing
 					throw new Exception("Could not find type.");
 				if (!lightType.IsAssignableTo(typeof(Light)))
 					throw new Exception($"Type does not inherit from ${nameof(Light)}.");
-				if (JsonSerializer.Deserialize(lightImport.Light.GetRawText(), lightType) is not Light light)
+				if (JsonSerializer.Deserialize(lightImport.Light.GetRawText(), lightType, options) is not Light light)
 					throw new Exception("Could not deserialize light object.");
 				lights.Add(light);
 			}

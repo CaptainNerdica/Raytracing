@@ -1,4 +1,6 @@
-﻿namespace Raytracing
+﻿using System.Numerics;
+
+namespace Raytracing
 {
 	public readonly struct RayHit
 	{

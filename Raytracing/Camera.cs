@@ -14,7 +14,7 @@ namespace Raytracing
 		public float MaxDistance { get; set; } = 100;
 		public float PlaneWidth { get; set; } = 0.1f;
 		public int MaxReflections { get; set; } = 25;
-		public float FieldOfView => 2 * MathF.Atan(PlaneWidth / 2 / NearClipping) * 180 / MathF.PI;
+		public float FieldOfView => 2 * MathF.Atan(PlaneWidth / 2 / NearClipping) * MathExt.RadiansToDegress;
 
 		public Camera() { }
 

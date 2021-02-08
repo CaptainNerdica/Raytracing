@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Raytracing
 			SkyBoxColorLow = skyboxLow;
 		}
 
-		public Color TraceRay(Ray ray, float currentLength, float maxDist, int blendAmount, ref long traced, int depth = 0)
+		public Color TraceRay(Ray ray, float currentLength, float maxDist, ref long traced, int depth = 0)
 		{
 			const float tolerance = 0.0001f;
 			if (depth >= Camera.MaxReflections)
@@ -39,16 +40,16 @@ namespace Raytracing
 				if (hitObj is not null)
 				{
 					Material material = hit.Material;
-					Vector3 newNormal = (hit.Normal + Vector3.RandomInUnit() * material.Diffuse / 2).Normalized;
+					Vector3 newNormal = (hit.Normal + VectorExtensions.RandomInUnit() * material.Diffuse / 4).Normalized();
 					Vector3 reflectDir = Vector3.Reflect(ray.Direction, newNormal);
 					Color reflectColor = default;
 					int outSign = -Math.Sign(Vector3.Dot(hit.Normal, ray.Direction));
 					if (material.Reflectivity > 0)
-						reflectColor = TraceRay(new Ray(hit.Point + hit.Normal * tolerance * outSign, reflectDir), currentLength + hit.Length, maxDist, blendAmount, ref traced, depth + 1);
+						reflectColor = TraceRay(new Ray(hit.Point + hit.Normal * tolerance * outSign, reflectDir), currentLength + hit.Length, maxDist, ref traced, depth + 1);
 					Color light = Lighting(hit.Point + hit.Normal * tolerance * outSign, outSign * newNormal, -ray.Direction, material);
 					//return light;
 					//return Color.Lerp(material.Color, reflectColor, material.Reflectivity);
-					return light * Color.Lerp(material.Color, reflectColor, material.Reflectivity);
+					return light * material.Color + reflectColor * material.Reflectivity;
 				}
 			}
 			float t = 0.5f * (ray.Direction.Y + 1);
@@ -85,7 +86,7 @@ namespace Raytracing
 				if (obj == null)
 				{
 					float lambertian = Vector3.Dot(lightVec, normal);
-					Vector3 h = (lightVec + viewDir).Normalized;
+					Vector3 h = (lightVec + viewDir).Normalized();
 					float specular = MathF.Pow(Math.Max(Vector3.Dot(h, normal), 0), material.Shininess);
 					Color c = light.Color * light.IntensityAt(point);
 					lightColor += lambertian * c + specular * c;
